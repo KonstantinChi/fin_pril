@@ -1,16 +1,17 @@
-... // Импортируйте ArrayList
+import java.util.ArrayList;
 
 public class ExpensesManager {
-    double[] expenses; // Замените массив списком
+    ArrayList<Double> expenses; // Замените массив списком
 
     ExpensesManager() {
-        expenses = new double[7]; // Создайте список в конструкторе
+        expenses = new ArrayList<>(); // Создайте список в конструкторе
     }
 
-    // Номер дня больше не нужен
-    double saveExpense(double moneyBeforeSalary, double expense, int day) {
+
+    double saveExpense(double moneyBeforeSalary, double expense) {
         moneyBeforeSalary = moneyBeforeSalary - expense;
-        expenses[day - 1] = expenses[day - 1] + expense; // Эту строку нужно убрать
+        expenses.add(expense);
+
         System.out.println("Значение сохранено! Ваш текущий баланс в рублях: " + moneyBeforeSalary);
         if (moneyBeforeSalary < 1000) {
             System.out.println("На вашем счету осталось совсем немного. Стоит начать экономить!");
@@ -18,19 +19,28 @@ public class ExpensesManager {
         return moneyBeforeSalary;
     }
 
+
+
     void printAllExpenses() {
-        for (int i = 0; i < expenses.length; i++) {
-            System.out.println("Трата № " + (i + 1) + ". Потрачено " + expenses[i] + " рублей");
+
+        for (Double exp: expenses){
+            System.out.println("Потрачено " + exp + " рублей");
         }
+
+        //for (int i = 0; i < expenses.size(); i++) {
+        //    System.out.println("Трата № " + (i + 1) + ". Потрачено " + expenses.size(i+1) + " рублей");
+        //}
     }
 
     double findMaxExpense() {
         double maxExpense = 0;
-        for (int i = 0; i < expenses.length; i++) { // Используйте сокращённую форму цикла
-            if (expenses[i] > maxExpense) {
-                maxExpense = expenses[i];
-            }
+
+        for (Double exp: expenses){
+            if (exp > maxExpense) {
+                maxExpense = exp;
+                }
         }
+
         return maxExpense;
     }
 }
